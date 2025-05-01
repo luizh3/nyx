@@ -1,17 +1,13 @@
-import { Head } from '@inertiajs/react'
-import { Button } from '@/components/ui/button'
-import { Input } from '~/lib/components/ui/input'
-
 export default function Home({ sayMyName }: any) {
   return (
     <>
-      <Head title="Homepage" />
-
-      <div className='flex items-center justify-center h-screen'>
-        <div className='flex flex-col gap-4 w-2/4'>
-          <Input></Input>
-          <Button>{sayMyName}</Button>
+      <div className="flex flex-1 flex-col gap-4 p-4 ">
+        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+          <div className="aspect-video rounded-xl bg-muted/50" />
+          <div className="aspect-video rounded-xl bg-muted/50" />
+          <div className="aspect-video rounded-xl bg-muted/50" />
         </div>
+        <div className="aspect-video rounded-xl bg-muted/50" />
       </div>
     </>
   )
