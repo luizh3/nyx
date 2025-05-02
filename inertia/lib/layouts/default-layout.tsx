@@ -18,9 +18,22 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AppSidebar } from '@/components/app-sidebar'
-
+import { Button } from '../components/ui/button'
+import { router } from '@inertiajs/react'
+import { showError } from '../components/toast-adapter'
+import { LogOut } from "lucide-react"
 
 export default function DefaultLayout({ children }: PropsWithChildren) {
+
+    function handleLogout(event: any) {
+        event.preventDefault()
+        router.post('/logout', {}, {
+            onError: () => {
+                showError("Falha fazer logout!")
+            }
+        })
+    }
+
     return (
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             <SidebarProvider>
@@ -42,6 +55,7 @@ export default function DefaultLayout({ children }: PropsWithChildren) {
                                 </BreadcrumbItem>
                             </BreadcrumbList>
                         </Breadcrumb>
+                        <Button className='ml-auto' variant="ghost" onClick={handleLogout}>Logout <LogOut /></Button>
                     </header>
                     <Separator />
                     <main>
