@@ -9,7 +9,7 @@ export const createGameValidator = vine.compile(
         price: vine.number().positive(),
         liquid_price: vine.number().positive(),
         description: vine.string().maxLength(200),
-        tags: vine.array(vine.number()).optional()
+        tags_id: vine.array(vine.number()).optional()
     })
 )
 

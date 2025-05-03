@@ -27,6 +27,8 @@ export default class GameService {
 
         const gameUpdated = await Game.findOrFail(game.id)
 
+        await gameUpdated.related('tags').sync(game.tags_id)
+
         return GamerMapper.toDTO(gameUpdated);
 
     }
@@ -42,11 +44,7 @@ export default class GameService {
             description: game.description
         })
 
-        const tagIds: number[] = game.tags?.map((tag) => { return tag.id }) ?? [];
-
-        await gameCreated.related('tags').attach(
-            tagIds
-        );
+        await gameCreated.related('tags').attach(game.tags_id);
 
         return GamerMapper.toDTO(gameCreated);
     }

@@ -20,7 +20,7 @@ export interface GameCardType {
     percentage_discount: string;
     price: string;
     liquid_price: string;
-    tags: GameCardType[],
+    tags: GameTagType[],
     description: string
 }
 

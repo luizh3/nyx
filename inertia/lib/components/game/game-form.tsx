@@ -2,25 +2,60 @@ import { Button } from "~/lib/components/ui/button";
 import { Label } from "~/lib/components/ui/label";
 import { useForm } from '@inertiajs/react'
 import InputLabel from "~/lib/components/input-label";
-import { GameCardType } from "../ui/game/section-card";
+import { GameCardType, GameTagType } from "../ui/game/section-card";
 import TextAreaLabel from "../text-area-label";
+import { useEffect, useState } from "react";
+import { MultiSelect } from "../multi-select";
+import MultiSelectMapper from "~/mappers/MultiSelectMapper";
 
-export default function GameForm({ onSubmit, game }: { onSubmit: any, game?: GameCardType }) {
+type GameFormData = {
+    poster_image_url: string
+    name: string
+    percentage_discount: string
+    price: string
+    liquid_price: string
+    description: string
+    tags_id: number[]
+}
 
-    const form = useForm({
+export default function GameForm({ onSubmit, game, tags }: { onSubmit: any, game?: GameCardType, tags: GameTagType[] }) {
+
+    const [selectedTags, setSelectedTags] = useState<string[]>(
+        game?.tags.map(current => String(current.id)) ?? []
+    );
+
+    const form = useForm<GameFormData>({
         poster_image_url: game?.poster_image_url ?? '',
         name: game?.name ?? '',
         percentage_discount: game?.percentage_discount ?? '0',
         price: game?.price ?? '0.00',
         liquid_price: game?.liquid_price ?? '0.00',
         description: game?.description ?? '',
-        tags: [1, 2]
+        tags_id: []
     })
 
     const { data, setData, errors } = form;
 
-    function handleSubmit(event: any) {
+    const tagsList = MultiSelectMapper.fromTagList(tags) ?? [];
 
+    useEffect(() => {
+
+        const tagsSelected = game?.tags.map((tag) => {
+            return String(tag.id)
+        }) ?? [];
+
+        setSelectedTags(tagsSelected);
+
+    }, [])
+
+    useEffect(() => {
+        setData('tags_id', selectedTags.map((tag) => {
+            return Number(tag);
+        }));
+    }, [selectedTags])
+
+
+    function handleSubmit(event: any) {
         event.preventDefault()
         onSubmit(form)
     }
@@ -93,6 +128,15 @@ export default function GameForm({ onSubmit, game }: { onSubmit: any, game?: Gam
                                 disabled
                             />
                         </div>
+                        <MultiSelect
+                            options={tagsList}
+                            onValueChange={setSelectedTags}
+                            defaultValue={selectedTags}
+                            placeholder="Select tags"
+                            variant="inverted"
+                            animation={0}
+                            maxCount={7}
+                        />
                         <TextAreaLabel
                             placeholder="More about game..."
                             id="description"
@@ -103,7 +147,7 @@ export default function GameForm({ onSubmit, game }: { onSubmit: any, game?: Gam
                             onChange={event => setData('description', event.target.value)}
                             maxLength={200}
                         />
-                        <div className="w-full h-48 border-2 border-dotted border-gray-800 rounded items-center flex justify-center p-2 bg-muted/50">
+                        <div className="w-full h-42 border-2 border-dotted border-gray-800 rounded items-center flex justify-center p-2 bg-muted/50">
                             <div className={`blur-2xls h-full w-full bg-[url(${data?.poster_image_url})] bg-contain bg-center bg-no-repeat`}></div>
                         </div>
                     </div>

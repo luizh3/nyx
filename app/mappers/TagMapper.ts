@@ -8,4 +8,5 @@ export default class TagMapper {
             description: tag.description
         }
     }
+
 }

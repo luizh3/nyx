@@ -3,6 +3,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import GameService from '../service/GameService.js';
 import { GameDTO } from '../dtos/GameDTO.js';
 import { createGameValidator } from '#validators/game';
+import TagService from '../service/TagService.js';
 
 export default class GameController {
   /**
@@ -10,18 +11,25 @@ export default class GameController {
    */
 
   @inject()
-  async index({ inertia }: HttpContext, gameService: GameService) {
+  async index({ inertia }: HttpContext, gameService: GameService, tagService: TagService) {
 
-    const games = await gameService.findAll();
+    const [games, tags] = await Promise.all([
+      gameService.findAll(),
+      tagService.findAll()
+    ])
 
-    return inertia.render('game/index', { games })
+    return inertia.render('game/index', { games, tags })
   }
 
   /**
    * Display form to create a new record
    */
-  async create({ inertia }: HttpContext) {
-    return inertia.render('game/create')
+  @inject()
+  async create({ inertia }: HttpContext, tagService: TagService) {
+
+    const tags = await tagService.findAll();
+
+    return inertia.render('game/create', { tags })
   }
 
   /**
@@ -32,9 +40,11 @@ export default class GameController {
 
     const payload = await request.validateUsing(createGameValidator) as GameDTO;
 
+    console.log(payload)
+
     const game = await gameService.store(payload);
 
-    response.redirect(`${game.id}`)
+    response.redirect(`game/${game.id}`)
   }
 
   /**
@@ -53,11 +63,14 @@ export default class GameController {
    * Edit individual record
    */
   @inject()
-  async edit({ params, inertia }: HttpContext, gameService: GameService) {
+  async edit({ params, inertia }: HttpContext, gameService: GameService, tagService: TagService) {
 
-    const game = await gameService.findOneById(params.id)
+    const [game, tags] = await Promise.all([
+      gameService.findOneById(params.id),
+      tagService.findAll()
+    ])
 
-    return inertia.render('game/edit', { game: game })
+    return inertia.render('game/edit', { game, tags })
   }
 
   /**

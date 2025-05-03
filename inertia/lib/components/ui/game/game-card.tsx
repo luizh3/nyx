@@ -17,8 +17,8 @@ export default function GameCard({ game }: { game: GameCardType }) {
 
     return (
         <div className="flex flex-col gap-4" onClick={handleClicked}>
-            <div className={`w-full rounded-xl h-80 bg-muted/50 bg-[url(${game.poster_image_url})] bg-cover group`}>
-                <div className="transition-all delay-150 hidden group-hover:flex bg-black/70 w-full h-full rounded items-center justify-center">
+            <div className={`w-full rounded-xl h-80 bg-muted/50 bg-[url(${game.poster_image_url})] bg-cover  bg-center group`}>
+                <div className="transition-all delay-150 hidden group-hover:flex bg-black/70 w-full h-full rounded items-center justify-center cursor-pointer">
                     <Label className="gap-4"><Plus /></Label>
                 </div>
             </div>
