@@ -66,7 +66,7 @@ const trendingInfos = {
   ]
 }
 
-export default function Home({ }: any) {
+export default function Home() {
   return (
     <div className="pl-12 pr-12 pt-8 pb-8 gap-8 flex flex-col flex-1">
 

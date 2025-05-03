@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Home, Inbox } from "lucide-react"
 
 import {
     Sidebar,
@@ -14,35 +14,28 @@ import {
 const items = [
     {
         title: "Home",
-        url: "#",
+        url: "/",
         icon: Home,
     },
     {
-        title: "Inbox",
-        url: "#",
+        title: "Register Game",
+        url: "/game/create",
         icon: Inbox,
     },
-    {
-        title: "Calendar",
-        url: "#",
-        icon: Calendar,
-    },
-    {
-        title: "Search",
-        url: "#",
-        icon: Search,
-    },
-    {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
-    },
+
 ]
 
 export function AppSidebar() {
     return (
         <Sidebar>
             <SidebarContent>
+                <div className="flex  mt-4 ml-4 items-center">
+                    <div className="flex h-12 w-12 ">
+                        <img src="/images/nyx.png" className="rounded"></img>
+                    </div>
+                    <SidebarGroupLabel className="text-xl font-bold">Nyx</SidebarGroupLabel>
+
+                </div>
                 <SidebarGroup>
                     <SidebarGroupLabel>Application</SidebarGroupLabel>
                     <SidebarGroupContent>

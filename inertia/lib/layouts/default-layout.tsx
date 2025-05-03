@@ -3,7 +3,6 @@ import { PropsWithChildren } from 'react'
 import {
     Breadcrumb,
     BreadcrumbItem,
-    BreadcrumbLink,
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator
@@ -22,6 +21,7 @@ import { Button } from '../components/ui/button'
 import { router } from '@inertiajs/react'
 import { showError } from '../components/toast-adapter'
 import { LogOut } from "lucide-react"
+import { usePage } from '@inertiajs/react'
 
 export default function DefaultLayout({ children }: PropsWithChildren) {
 
@@ -34,6 +34,10 @@ export default function DefaultLayout({ children }: PropsWithChildren) {
         })
     }
 
+    const location = usePage().url
+    const path = location.replace(/^\//, '')
+    const segments = path ? path.split('/') : [];
+
     return (
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             <SidebarProvider>
@@ -42,23 +46,24 @@ export default function DefaultLayout({ children }: PropsWithChildren) {
                     <header className="flex h-16 shrink-0 items-center px-4">
                         <SidebarTrigger className="-ml-1" />
                         <Separator orientation="vertical" className="h-4 m-2" />
-                        <Breadcrumb>
+                        <Breadcrumb className='ml-4'>
                             <BreadcrumbList>
-                                <BreadcrumbItem className="hidden md:block">
-                                    <BreadcrumbLink href="#">
-                                        Building Your Application
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator className="hidden md:block" />
-                                <BreadcrumbItem>
-                                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                                </BreadcrumbItem>
+                                {
+                                    segments.map((path, index) => {
+                                        return <>
+                                            <BreadcrumbItem>
+                                                <BreadcrumbPage>{path.charAt(0).toUpperCase() + path.slice(1)}</BreadcrumbPage>
+                                            </BreadcrumbItem>
+                                            {index != (segments.length - 1) && <BreadcrumbSeparator className="hidden md:block" />}
+                                        </>
+                                    })
+                                }
                             </BreadcrumbList>
                         </Breadcrumb>
                         <Button className='ml-auto' variant="ghost" onClick={handleLogout}>Logout <LogOut /></Button>
                     </header>
                     <Separator />
-                    <main>
+                    <main className='flex-1'>
                         {children}
                     </main>
                 </SidebarInset>

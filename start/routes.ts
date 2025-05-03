@@ -17,6 +17,11 @@ const RegisterController = () => import('#controllers/register_controller')
 
 router.group(() => {
     router.get('/', [HomeController, 'index']);
+    router.get('/game/create', [GameController, 'create'])
+    router.post('/game', [GameController, 'store'])
+    router.get('/game/:id', [GameController, 'show'])
+    router.get('/game/:id/edit', [GameController, 'edit'])
+    router.put('/game/:id', [GameController, 'update'])
 }).use(middleware.auth())
 
 router.group(() => {
@@ -27,12 +32,12 @@ router.group(() => {
 router.group(() => {
     router.post('/register', [RegisterController, 'store']);
     router.post('/login', [SessionController, 'store'])
-}).use(middleware.redirectAuth())
+})
 
 router.post('logout', async ({ auth, response }) => {
     await auth.use('web').logout()
     return response.redirect('/login')
 }).use(middleware.auth())
 
-router.resource('games', GameController)
+
 

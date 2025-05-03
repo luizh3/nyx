@@ -2,47 +2,77 @@ import { inject } from '@adonisjs/core';
 import type { HttpContext } from '@adonisjs/core/http'
 import GameService from '../service/GameService.js';
 import { GameDTO } from '../dtos/GameDTO.js';
+import { createGameValidator } from '#validators/game';
 
 export default class GameController {
   /**
    * Display a list of resource
    */
 
-  async index(context: HttpContext,) {
-
+  async index({ inertia }: HttpContext,) {
+    return inertia.render('game/index')
   }
 
   /**
    * Display form to create a new record
    */
-  async create({ }: HttpContext) { }
+  async create({ inertia }: HttpContext) {
+    return inertia.render('game/create')
+  }
 
   /**
    * Handle form submission for the create action
    */
   @inject()
-  async store({ request }: HttpContext, gameService: GameService) {
+  async store({ request, response }: HttpContext, gameService: GameService) {
 
-    const data = request.all() as GameDTO
+    const payload = await request.validateUsing(createGameValidator) as GameDTO;
 
-    gameService.store(data);
+    console.log(payload);
 
+    const game = await gameService.store(payload);
+
+    response.redirect(`${game.id}`)
   }
 
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) { }
+  @inject()
+  async show({ params, inertia }: HttpContext, gameService: GameService) {
+
+    const game = await gameService.findOneById(params.id);
+
+    return inertia.render('game/show', { game: game })
+
+  }
 
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) { }
+  @inject()
+  async edit({ params, inertia }: HttpContext, gameService: GameService) {
+
+    const game = await gameService.findOneById(params.id)
+
+    return inertia.render('game/edit', { game: game })
+  }
 
   /**
    * Handle form submission for the edit action
    */
-  async update(context: HttpContext) { }
+  @inject()
+  async update({ params, request, response }: HttpContext, gameService: GameService) {
+
+    const payload = await request.validateUsing(createGameValidator) as GameDTO;
+
+    payload.id = params.id;
+
+    const game = await gameService.update(payload);
+
+    response.redirect(`${game.id}`)
+
+  }
 
   /**
    * Delete record

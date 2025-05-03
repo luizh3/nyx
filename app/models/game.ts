@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
+import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import Tag from '#models/tag'
 
 export default class Game extends BaseModel {
   @column({ isPrimary: true })
@@ -7,6 +9,9 @@ export default class Game extends BaseModel {
 
   @column()
   declare posterImageUrl: string
+
+  @column()
+  declare description: string
 
   @column()
   declare name: string
@@ -25,5 +30,10 @@ export default class Game extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @manyToMany(() => Tag, {
+    pivotTable: 'game_tags',
+  })
+  declare tags: ManyToMany<typeof Tag>
 
 }

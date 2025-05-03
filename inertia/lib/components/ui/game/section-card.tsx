@@ -8,12 +8,20 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 
+export interface GameTagType {
+    id: number
+    description: string,
+}
+
 export interface GameCardType {
+    id?: number;
     poster_image_url: string;
     name: string;
-    percentage_discount: number;
-    price: number;
-    liquid_price: number;
+    percentage_discount: string;
+    price: string;
+    liquid_price: string;
+    tags: GameCardType[],
+    description: string
 }
 
 interface SectionInfoType {

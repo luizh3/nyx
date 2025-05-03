@@ -1,5 +1,3 @@
-import { GalleryVerticalEnd } from "lucide-react"
-
 import AuthLayout from "~/lib/layouts/auth-layout"
 import { ReactNode } from "react"
 import { RegisterForm } from "~/lib/components/register-form"
