@@ -1,4 +1,6 @@
 import { Home, Inbox } from "lucide-react"
+import { router } from "@inertiajs/react"
+import { Label } from "./ui/label"
 
 import {
     Sidebar,
@@ -43,10 +45,12 @@ export function AppSidebar() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Label className="cursor-pointer" onClick={() => {
+                                            router.visit(item.url)
+                                        }}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Label>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
