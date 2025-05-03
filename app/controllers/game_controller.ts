@@ -9,8 +9,12 @@ export default class GameController {
    * Display a list of resource
    */
 
-  async index({ inertia }: HttpContext,) {
-    return inertia.render('game/index')
+  @inject()
+  async index({ inertia }: HttpContext, gameService: GameService) {
+
+    const games = await gameService.findAll();
+
+    return inertia.render('game/index', { games })
   }
 
   /**
@@ -27,8 +31,6 @@ export default class GameController {
   async store({ request, response }: HttpContext, gameService: GameService) {
 
     const payload = await request.validateUsing(createGameValidator) as GameDTO;
-
-    console.log(payload);
 
     const game = await gameService.store(payload);
 

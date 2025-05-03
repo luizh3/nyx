@@ -5,6 +5,12 @@ import GamerMapper from "../mappers/GameMapper.js";
 
 export default class GameService {
 
+    async findAll(): Promise<GameDTO[]> {
+        return (await Game.query().preload('tags')).map((game) => {
+            return GamerMapper.toDTO(game);
+        })
+    }
+
     async update(game: GameDTO): Promise<GameDTO> {
 
         await Game
@@ -38,11 +44,9 @@ export default class GameService {
 
         const tagIds: number[] = game.tags?.map((tag) => { return tag.id }) ?? [];
 
-
         await gameCreated.related('tags').attach(
-            [1, 2]
+            tagIds
         );
-
 
         return GamerMapper.toDTO(gameCreated);
     }
@@ -53,9 +57,6 @@ export default class GameService {
             .where('id', id)
             .preload('tags')
             .firstOrFail()
-
-        console.log("Aqui")
-        console.log(game)
 
         return GamerMapper.toDTO(game);
 

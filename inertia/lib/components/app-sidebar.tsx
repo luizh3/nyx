@@ -24,7 +24,11 @@ const items = [
         url: "/game/create",
         icon: Inbox,
     },
-
+    {
+        title: "Games",
+        url: "/game",
+        icon: Inbox,
+    },
 ]
 
 export function AppSidebar() {
