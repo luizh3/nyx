@@ -9,5 +9,5 @@ export interface GameDTO {
     liquid_price: number,
     description: string,
     tags?: TagDTO[]
-    tagsId: number[]
+    tags_id: number[]
 }

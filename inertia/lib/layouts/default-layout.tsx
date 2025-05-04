@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react'
+import { LogOut } from "lucide-react"
 
 import {
     Breadcrumb,
@@ -17,11 +18,11 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AppSidebar } from '@/components/app-sidebar'
-import { Button } from '../components/ui/button'
 import { router } from '@inertiajs/react'
-import { showError } from '../components/toast-adapter'
-import { LogOut } from "lucide-react"
 import { usePage } from '@inertiajs/react'
+
+import { Button } from '../components/ui/button'
+import { showError } from '../components/toast-adapter'
 
 export default function DefaultLayout({ children }: PropsWithChildren) {
 

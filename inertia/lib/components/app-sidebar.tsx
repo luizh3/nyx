@@ -13,22 +13,42 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-const items = [
+const sections = [
     {
-        title: "Home",
-        url: "/",
-        icon: Home,
+        title: "Application",
+        items: [
+            {
+                title: "Home",
+                url: "/",
+                icon: Home,
+            },
+            {
+                title: "Games",
+                url: "/game",
+                icon: Inbox,
+            },
+        ]
     },
     {
-        title: "Register Game",
-        url: "/game/create",
-        icon: Inbox,
-    },
-    {
-        title: "Games",
-        url: "/game",
-        icon: Inbox,
-    },
+        title: "Operations",
+        items: [
+            {
+                title: "Register Game",
+                url: "/game/create",
+                icon: Inbox,
+            },
+            {
+                title: "Register Section",
+                url: "/section/create",
+                icon: Inbox,
+            },
+            {
+                title: "Sections",
+                url: "/section",
+                icon: Inbox,
+            },
+        ]
+    }
 ]
 
 export function AppSidebar() {
@@ -43,23 +63,27 @@ export function AppSidebar() {
 
                 </div>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            {items.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <Label className="cursor-pointer" onClick={() => {
-                                            router.visit(item.url)
-                                        }}>
-                                            <item.icon />
-                                            <span>{item.title}</span>
-                                        </Label>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
+                    {sections.map((section) => {
+                        return <>
+                            <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
+                            <SidebarGroupContent>
+                                <SidebarMenu>
+                                    {section.items.map((item) => (
+                                        <SidebarMenuItem key={item.title}>
+                                            <SidebarMenuButton asChild>
+                                                <Label className="cursor-pointer" onClick={() => {
+                                                    router.visit(item.url)
+                                                }}>
+                                                    <item.icon />
+                                                    <span>{item.title}</span>
+                                                </Label>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+                                    ))}
+                                </SidebarMenu>
+                            </SidebarGroupContent>
+                        </>
+                    })}
                 </SidebarGroup>
             </SidebarContent>
         </Sidebar>

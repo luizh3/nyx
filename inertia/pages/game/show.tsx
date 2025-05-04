@@ -3,9 +3,9 @@ import { ShoppingCart } from "lucide-react";
 import PriceLabel from "~/lib/components/game/price-label";
 import { Badge } from "~/lib/components/ui/badge";
 import { Button } from "~/lib/components/ui/button";
-import { GameCardType } from "~/lib/components/ui/game/section-card";
+import { GameType } from "~/types/react_types";
 
-export default function ShowGame({ game }: { game: GameCardType }) {
+export default function ShowGame({ game }: { game: GameType }) {
     return (
         <>
             <div className={`w-full relative blur-lg rounded-xl h-96 bg-muted/50 bg-[url(${game.poster_image_url})] bg-cover`}></div>

@@ -40,8 +40,6 @@ export default class GameController {
 
     const payload = await request.validateUsing(createGameValidator) as GameDTO;
 
-    console.log(payload)
-
     const game = await gameService.store(payload);
 
     response.redirect(`game/${game.id}`)

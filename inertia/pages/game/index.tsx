@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+
 import InputLabel from "~/lib/components/input-label";
 import { MultiSelect } from "~/lib/components/multi-select";
 import GameCard from "~/lib/components/ui/game/game-card";
-import { GameCardType, GameTagType } from "~/lib/components/ui/game/section-card";
+import { TagType, GameType } from "~/types/react_types";
 
-export default function ListGames({ games, tags }: { games: GameCardType[], tags: GameTagType[] }) {
+export default function ListGames({ games, tags }: { games: GameType[], tags: TagType[] }) {
 
     const [nameFilter, setNameFilter] = useState('');
-    const [gamesFilteres, setGamesFiltered] = useState<GameCardType[]>([]);
+    const [gamesFilteres, setGamesFiltered] = useState<GameType[]>([]);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
     const tagsListSelected = tags.map((tag) => {

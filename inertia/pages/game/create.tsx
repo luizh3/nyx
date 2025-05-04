@@ -1,7 +1,7 @@
 import GameForm from "~/lib/components/game/game-form";
-import { GameTagType } from "~/lib/components/ui/game/section-card";
+import { TagType } from "~/types/react_types";
 
-export default function CreateGame({ tags }: { tags: GameTagType[] }) {
+export default function CreateGame({ tags }: { tags: TagType[] }) {
 
     function onSubmit(form: any) {
         form.post(`/game`)

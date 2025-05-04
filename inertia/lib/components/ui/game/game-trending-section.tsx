@@ -5,17 +5,9 @@ import {
 } from "@/components/ui/carousel"
 
 import Autoplay from "embla-carousel-autoplay"
+import { GameType, SectionType } from "~/types/react_types"
 
-interface GamTreedingInfoType {
-    id: number;
-    poster_image_url: string;
-}
-
-interface GameTrendingType {
-    games: GamTreedingInfoType[]
-}
-
-export default function GameTrendingSection({ infos }: { infos: GameTrendingType }) {
+export default function GameTrendingSection({ section }: { section: SectionType | undefined }) {
     return (
         <Carousel
             opts={{
@@ -31,7 +23,7 @@ export default function GameTrendingSection({ infos }: { infos: GameTrendingType
         >
             <CarouselContent>
                 {
-                    infos.games.map((game: GamTreedingInfoType, index: number) => {
+                    section?.games.map((game: GameType, index: number) => {
                         return <CarouselItem key={index}>
                             <img src={`${game.poster_image_url}`} alt="Treding Game Image" className="w-full h-80 object-fill rounded" />
                         </CarouselItem>

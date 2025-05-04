@@ -1,12 +1,14 @@
+import { useEffect, useState } from "react";
+import { useForm } from '@inertiajs/react'
+
 import { Button } from "~/lib/components/ui/button";
 import { Label } from "~/lib/components/ui/label";
-import { useForm } from '@inertiajs/react'
 import InputLabel from "~/lib/components/input-label";
-import { GameCardType, GameTagType } from "../ui/game/section-card";
-import TextAreaLabel from "../text-area-label";
-import { useEffect, useState } from "react";
-import { MultiSelect } from "../multi-select";
 import MultiSelectMapper from "~/mappers/MultiSelectMapper";
+import { TagType, GameType } from "~/types/react_types";
+
+import TextAreaLabel from "../text-area-label";
+import { MultiSelect } from "../multi-select";
 
 type GameFormData = {
     poster_image_url: string
@@ -18,7 +20,18 @@ type GameFormData = {
     tags_id: number[]
 }
 
-export default function GameForm({ onSubmit, game, tags }: { onSubmit: any, game?: GameCardType, tags: GameTagType[] }) {
+export default function GameForm(
+    {
+        onSubmit,
+        game,
+        tags,
+        buttonSubmitLabel = "Register"
+    }: {
+        onSubmit: any,
+        game?: GameType,
+        tags: TagType[],
+        buttonSubmitLabel?: string
+    }) {
 
     const [selectedTags, setSelectedTags] = useState<string[]>(
         game?.tags.map(current => String(current.id)) ?? []
@@ -151,7 +164,7 @@ export default function GameForm({ onSubmit, game, tags }: { onSubmit: any, game
                             <div className={`blur-2xls h-full w-full bg-[url(${data?.poster_image_url})] bg-contain bg-center bg-no-repeat`}></div>
                         </div>
                     </div>
-                    <Button type="submit" className="w-full">Register</Button>
+                    <Button type="submit" className="w-full">{buttonSubmitLabel}</Button>
                 </form>
 
             </div>

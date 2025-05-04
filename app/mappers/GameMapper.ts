@@ -13,11 +13,18 @@ export default class GamerMapper {
             name: game.name,
             price: game.price,
             description: game.description,
+            tags_id: [],
             tags: game.tags?.map((tag) => {
                 return TagMapper.toDTO(tag)
             },
             ) ?? []
         }
+    }
+
+    static toDTOList(games: Game[]): GameDTO[] {
+        return games?.map((game) => {
+            return GamerMapper.toDTO(game);
+        }) ?? [];
     }
 
 }

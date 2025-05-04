@@ -1,3 +1,4 @@
+import { GameType, SectionType } from "~/types/react_types";
 import GameCard from "./game-card";
 
 import {
@@ -8,41 +9,20 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 
-export interface GameTagType {
-    id: number
-    description: string,
-}
-
-export interface GameCardType {
-    id?: number;
-    poster_image_url: string;
-    name: string;
-    percentage_discount: string;
-    price: string;
-    liquid_price: string;
-    tags: GameTagType[],
-    description: string
-}
-
-interface SectionInfoType {
-    title: string;
-    games: GameCardType[];
-}
-
 interface NumberCards {
     max: number;
-    min: number
+    min: number;
 }
 
 interface ConfigSectionType {
-    numberCards: NumberCards
+    numberCards: NumberCards;
 }
 
-export default function SectionCard({ infos, config }: { infos: SectionInfoType, config?: ConfigSectionType }) {
+export default function SectionCard({ infos, config }: { infos: SectionType, config?: ConfigSectionType }) {
     return (
         <div className="w-full flex flex-col gap-4">
-            {infos.title && <label className="text-xl font-bold">
-                {infos.title}
+            {infos.description && <label className="text-xl font-bold">
+                {infos.description}
             </label>}
             <div className="pl-16 pr-16">
                 <Carousel
@@ -54,7 +34,7 @@ export default function SectionCard({ infos, config }: { infos: SectionInfoType,
                 >
                     <CarouselContent>
                         {
-                            infos.games.map((game: GameCardType, index: number) => {
+                            infos.games.map((game: GameType, index: number) => {
                                 return <CarouselItem key={index}
                                     className={
                                         `md:basis-1/${config?.numberCards?.min ?? 2}

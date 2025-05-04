@@ -1,14 +1,18 @@
 import GameForm from "~/lib/components/game/game-form";
+import { TagType, GameType } from "~/types/react_types";
 
-import { GameCardType, GameTagType } from "~/lib/components/ui/game/section-card";
-
-export default function EditGame({ game, tags }: { game: GameCardType, tags: GameTagType[] }) {
+export default function EditGame({ game, tags }: { game: GameType, tags: TagType[] }) {
 
     function onSubmit(form: any) {
         form.put(`/game/${game.id}`)
     }
 
     return (
-        <GameForm onSubmit={onSubmit} game={game} tags={tags}></GameForm>
+        <GameForm
+            onSubmit={onSubmit}
+            game={game}
+            tags={tags}
+            buttonSubmitLabel="Update"
+        ></GameForm>
     )
 }
