@@ -8,7 +8,7 @@ import { resolvePageComponent } from '@adonisjs/inertia/helpers';
 import DefaultLayout from '~/lib/layouts/default-layout';
 import { ReactNode } from 'react';
 
-const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS';
+const appName = import.meta.env.VITE_APP_NAME || 'Nyx Store';
 
 createInertiaApp({
   progress: { color: '#5468FF' },
