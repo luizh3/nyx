@@ -1,6 +1,6 @@
-import { GameType, SectionType } from "~/types/react_types"
-
-import SectionForm from "~/lib/components/section/section-form"
+import { GameType, SectionType } from "~/types/react_types";
+import { Head } from "@inertiajs/react";
+import SectionForm from "~/lib/components/section/section-form";
 
 export default function SectionList(
     {
@@ -8,19 +8,22 @@ export default function SectionList(
         section
     }: {
         games: GameType[],
-        section: SectionType
+        section: SectionType;
     }) {
 
     function handleSubmit(form: any) {
-        form.put(`/section/${section.id}`)
+        form.put(`/section/${section.id}`);
     }
 
     return (
-        <SectionForm
-            games={games}
-            section={section}
-            buttonSubmitLabel="Update"
-            onSubmit={handleSubmit}>
-        </SectionForm>
-    )
+        <>
+            <Head title="Edit Section" />
+            <SectionForm
+                games={games}
+                section={section}
+                buttonSubmitLabel="Update"
+                onSubmit={handleSubmit}>
+            </SectionForm>
+        </>
+    );
 }
