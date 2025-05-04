@@ -1,5 +1,5 @@
 import Tag from '#models/tag'
-import { TagDTO } from '../dtos/TagDTO.js'
+import { TagDTO } from '../dtos/tag_dto.js'
 
 export default class TagMapper {
     static toDTO(tag: Tag): TagDTO {

@@ -1,7 +1,7 @@
 import Game from "#models/game"; `
 `
-import { GameDTO } from "../dtos/GameDTO.js";
-import GamerMapper from "../mappers/GameMapper.js";
+import { GameDTO } from "../dtos/game_dto.js";
+import GamerMapper from "../mappers/game_mapper.js";
 
 export default class GameService {
 

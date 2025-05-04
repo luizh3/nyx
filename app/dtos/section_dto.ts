@@ -1,4 +1,4 @@
-import { GameDTO } from "./GameDTO.js";
+import { GameDTO } from "./game_dto.js";
 
 export interface SectionDTO {
     id: number;

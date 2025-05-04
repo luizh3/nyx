@@ -90,9 +90,9 @@ export default function GameForm(
 
     return (
         <div className="h-full w-full flex items-center justify-center">
-            <div className="w-2/4 mt-12 mb-12">
+            <div className="w-3/4 mt-12 mb-12">
                 <Label className="text-xl font-bold">Register Game</Label>
-                <form onSubmit={handleSubmit} className="justify-between items-center flex flex-col pt-16 h-full gap-12">
+                <form onSubmit={handleSubmit} className="justify-between items-center flex flex-col pt-8 h-full gap-12">
                     <div className="w-full flex flex-col gap-4">
                         <InputLabel
                             id="name"

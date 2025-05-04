@@ -1,3 +1,4 @@
+import { Label } from "@radix-ui/react-label";
 import { useEffect, useState } from "react";
 
 import InputLabel from "~/lib/components/input-label";
@@ -25,7 +26,11 @@ export default function ListGames({ games, tags }: { games: GameType[], tags: Ta
     }, [nameFilter, selectedTags])
 
     return (
-        <div className=" gap-6 pl-12 pr-12 pt-6 pb-6 flex flex-col ">
+        <div className="gap-6 pl-12 pr-12 pt-6 pb-6 flex flex-col">
+            <div className="flex justify-between">
+                <Label className="text-xl font-bold">Games</Label>
+                <Label className="text-sm text-gray-300">Total results: {gamesFilteres.length}</Label>
+            </div>
             <InputLabel
                 label=""
                 placeholder="Search by name..."
@@ -40,10 +45,10 @@ export default function ListGames({ games, tags }: { games: GameType[], tags: Ta
                 animation={0}
                 maxCount={7}
             />
-            <div className="grid grid-cols-7 gap-6">
-                {gamesFilteres.map((game) => {
-                    return <GameCard game={game}></GameCard>
-                })}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-6">
+                {gamesFilteres.map((game) => (
+                    <GameCard game={game} key={game.id} />
+                ))}
             </div>
         </div>)
 }

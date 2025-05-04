@@ -1,6 +1,6 @@
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import SectionService from '../service/SectionService.js'
+import SectionService from '../service/section_service.js'
 
 export default class HomeController {
 

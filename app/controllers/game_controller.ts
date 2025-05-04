@@ -1,11 +1,14 @@
 import { inject } from '@adonisjs/core';
 import type { HttpContext } from '@adonisjs/core/http'
-import GameService from '../service/GameService.js';
-import { GameDTO } from '../dtos/GameDTO.js';
+
 import { createGameValidator } from '#validators/game';
-import TagService from '../service/TagService.js';
+
+import GameService from '../service/game_service.js';
+import { GameDTO } from '../dtos/game_dto.js';
+import TagService from '../service/tag_service.js';
 
 export default class GameController {
+
   /**
    * Display a list of resource
    */

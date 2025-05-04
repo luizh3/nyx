@@ -1,6 +1,6 @@
 import Section from "#models/section";
-import { SectionDTO } from "../dtos/SectionDTO.js";
-import SectionMapper from "../mappers/SectionMapper.js";
+import { SectionDTO } from "../dtos/section_dto.js";
+import SectionMapper from "../mappers/section_mapper.js";
 
 export default class SectionService {
 
@@ -51,6 +51,14 @@ export default class SectionService {
         await sectionUpdated.related('games').sync(section.games_id)
 
         return SectionMapper.toDTO(sectionUpdated);
+
+    }
+
+    async delete(id: number) {
+
+        await Section.query()
+            .where('id', id)
+            .delete();
 
     }
 

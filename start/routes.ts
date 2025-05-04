@@ -31,6 +31,7 @@ router.group(() => {
     router.post('/section', [SectionController, 'store'])
     router.get('/section', [SectionController, 'index'])
     router.get('/section/create', [SectionController, 'create'])
+    router.delete('/section/:id', [SectionController, 'destroy'])
 
 }).use(middleware.auth())
 

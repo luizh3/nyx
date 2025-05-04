@@ -1,4 +1,4 @@
-import { TagDTO } from "./TagDTO.js"
+import { TagDTO } from "./tag_dto.js"
 
 export interface GameDTO {
     id: number,

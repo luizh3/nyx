@@ -41,17 +41,11 @@ export default function GameCard({
 
     return (
         <div
-            className={`flex ${isHorizontal ? `flex-row rounded ${isSelected ? 'bg-indigo-600' : 'bg-muted/50'}` : "flex-col"} gap-4 cursor-pointer`}
+            className={`flex ${isHorizontal ? `flex-row rounded ${isSelected ? 'bg-indigo-600' : 'bg-muted/50'}` : "flex-col"} gap-4 cursor-pointer w-full`}
             onClick={handleClicked}
         >
             <div
-                className={`
-                    ${isHorizontal ? "w-54 h-24" : "w-full h-80"}
-                    rounded bg-muted/50
-                    bg-[url(${game.poster_image_url})]
-                    bg-cover bg-center group
-                `}
-            >
+                className={`  ${isHorizontal ? "w-54 h-24" : "w-full h-80"} rounded bg-muted/50 bg-[url(${game.poster_image_url})] bg-cover bg-center group `} >
                 <div className="transition-all delay-150 hidden group-hover:flex bg-black/70 w-full h-full rounded items-center justify-center">
                     <Label className="gap-4">
                         <Plus />
@@ -68,5 +62,6 @@ export default function GameCard({
                 />
             </div>
         </div>
+
     );
 }

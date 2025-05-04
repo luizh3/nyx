@@ -1,6 +1,6 @@
 import Tag from "#models/tag";
-import { TagDTO } from "../dtos/TagDTO.js";
-import TagMapper from "../mappers/TagMapper.js";
+import { TagDTO } from "../dtos/tag_dto.js";
+import TagMapper from "../mappers/tag_mapper.js";
 
 export default class TagService {
 

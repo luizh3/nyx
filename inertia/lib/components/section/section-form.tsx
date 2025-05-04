@@ -8,6 +8,7 @@ import { Button } from "~/lib/components/ui/button"
 import { GameType, SectionType } from "~/types/react_types"
 
 import { useForm } from "@inertiajs/react"
+import { Trash2Icon } from "lucide-react"
 
 type SectionFormData = {
     description: string,
@@ -50,6 +51,11 @@ export default function SectionForm(
         onSubmit(form)
     }
 
+    function handleDelete(event: any) {
+        event.preventDefault()
+        form.delete(`/section/${section?.id}`)
+    }
+
     useEffect(() => {
         setData('games_id', selects)
     }, [selects])
@@ -62,8 +68,11 @@ export default function SectionForm(
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <form onSubmit={handleSubmit} className="p-14 w-3/4 gap-6 flex flex-col">
+            <form onSubmit={handleSubmit} className="pt-14 w-3/4 gap-6 flex flex-col">
                 <Label className="text-xl font-bold">Section</Label>
+
+                {section && <Button onClick={handleDelete} className="w-42" type="button" variant="destructive">Delete <Trash2Icon /> </Button>}
+
                 <InputLabel
                     label="Description"
                     placeholder="Search by name..."

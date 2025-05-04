@@ -63,13 +63,13 @@ export function AppSidebar() {
 
                 </div>
                 <SidebarGroup>
-                    {sections.map((section) => {
-                        return <>
+                    {sections.map((section, key) => {
+                        return <div key={key}>
                             <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
                             <SidebarGroupContent>
                                 <SidebarMenu>
-                                    {section.items.map((item) => (
-                                        <SidebarMenuItem key={item.title}>
+                                    {section.items.map((item, key) => (
+                                        <SidebarMenuItem key={key}>
                                             <SidebarMenuButton asChild>
                                                 <Label className="cursor-pointer" onClick={() => {
                                                     router.visit(item.url)
@@ -82,7 +82,7 @@ export function AppSidebar() {
                                     ))}
                                 </SidebarMenu>
                             </SidebarGroupContent>
-                        </>
+                        </div>
                     })}
                 </SidebarGroup>
             </SidebarContent>

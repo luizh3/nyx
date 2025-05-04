@@ -1,6 +1,6 @@
 import Section from "#models/section";
-import { SectionDTO } from "../dtos/SectionDTO.js";
-import GamerMapper from "./GameMapper.js";
+import { SectionDTO } from "../dtos/section_dto.js";
+import GamerMapper from "./game_mapper.js";
 
 export default class SectionMapper {
     static toDTO(section: Section): SectionDTO {

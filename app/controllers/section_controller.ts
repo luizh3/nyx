@@ -1,9 +1,11 @@
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import GameService from '../service/GameService.js'
-import SectionService from '../service/SectionService.js';
+
 import { createSectionValidator } from '#validators/section';
-import { SectionDTO } from '../dtos/SectionDTO.js';
+
+import GameService from '../service/game_service.js'
+import SectionService from '../service/section_service.js';
+import { SectionDTO } from '../dtos/section_dto.js';
 
 export default class SectionsController {
 
@@ -11,8 +13,6 @@ export default class SectionsController {
   async index({ inertia }: HttpContext, sectionService: SectionService) {
 
     const sections = await sectionService.findAll();
-
-    console.log(sections)
 
     return inertia.render('section/index', { sections })
   }
@@ -55,6 +55,19 @@ export default class SectionsController {
     payload.id = params.id;
 
     await sectionService.update(payload);
+
+    response.redirect(`/section`)
+
+  }
+
+
+  /**
+   * Delete record
+   */
+  @inject()
+  async destroy({ params, response }: HttpContext, sectionService: SectionService) {
+
+    sectionService.delete(params.id);
 
     response.redirect(`/section`)
 

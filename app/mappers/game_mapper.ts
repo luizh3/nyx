@@ -1,6 +1,6 @@
 import type Game from "#models/game";
-import { GameDTO } from "../dtos/GameDTO.js";
-import TagMapper from "./TagMapper.js";
+import { GameDTO } from "../dtos/game_dto.js";
+import TagMapper from "./tag_mapper.js";
 
 export default class GamerMapper {
 
