@@ -93,5 +93,5 @@ export default class GameController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) { }
+  async destroy({ }: HttpContext) { }
 }
