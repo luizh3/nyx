@@ -68,14 +68,14 @@ export default function SectionForm(
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <form onSubmit={handleSubmit} className="pt-14 w-3/4 gap-6 flex flex-col">
+            <form onSubmit={handleSubmit} className="pt-14 pb-14 w-3/4 gap-6 flex flex-col">
                 <Label className="text-xl font-bold">Section</Label>
 
                 {section && <Button onClick={handleDelete} className="w-42" type="button" variant="destructive">Delete <Trash2Icon /> </Button>}
 
                 <InputLabel
                     label="Description"
-                    placeholder="Search by name..."
+                    placeholder=""
                     onChange={event => setData('description', event.target.value)}
                     error={errors.description}
                     value={data.description}

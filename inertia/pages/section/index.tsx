@@ -15,7 +15,7 @@ export default function ListSections({ sections }: { sections: SectionType[]; })
             <div className="flex h-full">
                 <div className="w-full pl-12 pr-12 pt-6 pb-6  flex flex-col gap-6">
                     <div className="flex justify-between">
-                        <Label className="text-xl font-bold">Register Game</Label>
+                        <Label className="text-xl font-bold">Sections</Label>
                         <Label className="text-sm text-gray-300">Total results: {sections.length}</Label>
                     </div>
                     <div className="bg-muted/25 p-4 gap-1 flex flex-col w-full h-full rounded items-center">
