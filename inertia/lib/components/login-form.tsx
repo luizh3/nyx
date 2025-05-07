@@ -45,6 +45,10 @@ export function LoginForm({
         })
     }
 
+    function handleRegister() {
+        router.visit('/register')
+    }
+
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card className="border-[var(--border)]">
@@ -78,7 +82,7 @@ export function LoginForm({
                             </div>
                             <div className="text-center text-sm">
                                 Don&apos;t have an account?{" "}
-                                <a href="/register" className="underline underline-offset-4">
+                                <a onClick={handleRegister} className="underline underline-offset-4 cursor-pointer">
                                     Sign up
                                 </a>
                             </div>

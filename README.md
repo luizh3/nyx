@@ -80,3 +80,9 @@ Acesse o sistema em: [http://localhost:3333](http://localhost:3333)
 ## 📄 Licença
 
 Este projeto é de uso exclusivamente acadêmico, sem fins comerciais.
+
+## Imagens 
+
+Imagens do resultado final estão disponíveis na pasta `documentation/images`
+
+![home](documentation/images/home.png)
