@@ -1,5 +1,6 @@
 import User from '#models/user'
 import type { HttpContext } from '@adonisjs/core/http'
+import { sendEmailConfirmation } from '../service/rabbitmq_service.js';
 
 export default class RegisterController {
 
@@ -22,8 +23,12 @@ export default class RegisterController {
             // throw new AuthorizedException('Usuário não autorizado para acessar este recurso')
         }
 
-        context.response.redirect('/login')
+        if (user) {
+            await sendEmailConfirmation(user)
+            context.session.flash('success', 'Cadastro realizado com sucesso! Enviamos um e-mail de confirmação para você.')
+        }
 
+        context.response.redirect('/register')
     }
 
 }

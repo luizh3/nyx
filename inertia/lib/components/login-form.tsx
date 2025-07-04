@@ -1,52 +1,57 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { router } from '@inertiajs/react'
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { router } from '@inertiajs/react';
 
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useState } from "react"
-import { showError } from "./toast-adapter"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { showError } from "./toast-adapter";
 
 export function LoginForm({
     className,
+    onEmailChange,
     ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentPropsWithoutRef<"div"> & { onEmailChange?: (email: string) => void; }) {
 
     const [values, setValues] = useState({
         password: "",
         email: "",
-    })
+    });
 
     function handleChange(event: any) {
 
         const key = event.target.id;
-        const value = event.target.value
+        const value = event.target.value;
         setValues(values => ({
             ...values,
             [key]: value,
-        }))
+        }));
+
+        if (key === 'email' && onEmailChange) {
+            onEmailChange(value);
+        }
 
     }
 
     function handleSubmit(event: any) {
-        event.preventDefault()
+        event.preventDefault();
         router.post('/login', values, {
             onError: (errorBag) => {
-                console.error(errorBag)
-                showError("Usuario ou senha invalidos!")
+                console.error(errorBag);
+                showError("Usuario ou senha invalidos!");
             }
-        })
+        });
     }
 
     function handleRegister() {
-        router.visit('/register')
+        router.visit('/register');
     }
 
     return (
@@ -91,5 +96,5 @@ export function LoginForm({
                 </CardContent>
             </Card>
         </div>
-    )
+    );
 }

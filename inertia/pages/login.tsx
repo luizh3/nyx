@@ -1,9 +1,27 @@
 import { LoginForm } from "@/components/login-form";
 import AuthLayout from "~/lib/layouts/auth-layout";
 import { ReactNode } from "react";
-import { Head } from "@inertiajs/react";
+import { Head, usePage, router } from "@inertiajs/react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
-export default function LoginPage() {
+export default function LoginPage(props: any) {
+    const { flash } = usePage().props as { flash?: { error?: string; success?: string; }; };
+    const [email, setEmail] = useState('');
+
+    const handleResendConfirmation = () => {
+        if (!email) {
+            return;
+        }
+
+        router.post('/resend-confirmation', { email }, {
+            onSuccess: () => {
+            },
+            onError: () => {
+            }
+        });
+    };
+
     return (
         <>
             <Head title="Login" />
@@ -15,7 +33,26 @@ export default function LoginPage() {
                         </div>
                         Nyx Store.
                     </a>
-                    <LoginForm />
+                    {flash?.error && (
+                        <div className="bg-red-100 text-red-700 border border-red-300 rounded p-3 text-center text-sm">
+                            <p className="mb-2">{flash.error}</p>
+                            <Button
+                                onClick={handleResendConfirmation}
+                                variant="outline"
+                                size="sm"
+                                className="w-full"
+                                disabled={!email}
+                            >
+                                Reenviar Confirmação
+                            </Button>
+                        </div>
+                    )}
+                    {flash?.success && (
+                        <div className="bg-green-100 text-green-700 border border-green-300 rounded p-3 text-center text-sm">
+                            {flash.success}
+                        </div>
+                    )}
+                    <LoginForm onEmailChange={setEmail} />
                 </div>
             </div>
         </>

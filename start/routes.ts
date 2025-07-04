@@ -38,11 +38,13 @@ router.group(() => {
 router.group(() => {
     router.get('/register', [RegisterController, 'index']);
     router.get('/login', [SessionController, 'index'])
+    router.get('/confirm-email/:id', [SessionController, 'confirmEmail'])
 })
 
 router.group(() => {
     router.post('/register', [RegisterController, 'store']);
     router.post('/login', [SessionController, 'store'])
+    router.post('/resend-confirmation', [SessionController, 'resendConfirmation'])
 })
 
 router.post('logout', async ({ auth, response }) => {

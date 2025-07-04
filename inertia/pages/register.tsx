@@ -1,8 +1,11 @@
 import AuthLayout from "~/lib/layouts/auth-layout";
 import { ReactNode } from "react";
 import { RegisterForm } from "~/lib/components/register-form";
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
+
 export default function Register() {
+    const { flash } = usePage().props as { flash?: { error?: string; success?: string; }; };
+
     return (
         <>
             <Head title="Register" />
@@ -14,6 +17,16 @@ export default function Register() {
                         </div>
                         Nyx Store.
                     </a>
+                    {flash?.error && (
+                        <div className=" bg-red-100 text-red-700 border border-red-300 rounded p-3 text-center text-sm">
+                            {flash.error}
+                        </div>
+                    )}
+                    {flash?.success && (
+                        <div className=" bg-green-100 text-green-700 border border-green-300 rounded p-3 text-center text-sm">
+                            {flash.success}
+                        </div>
+                    )}
                     <RegisterForm />
                 </div>
             </div>
