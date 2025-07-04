@@ -85,7 +85,7 @@ Para o fluxo de confirmação de e-mail, este projeto utiliza um microserviço d
 
 Abaixo está o diagrama que demonstra a arquitetura e o fluxo de confirmação de e-mail utilizado neste sistema:
 
-![Fluxo de Confirmação de E-mail](documentation/images/fluxo-confirmar-email.png)
+![Fluxo de Confirmação de E-mail](documentation/images/fluxo-confirmar-email.jpeg)
 
 ---
 
